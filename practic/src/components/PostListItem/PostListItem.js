@@ -10,6 +10,8 @@ class PostListItem extends Component {
 			modal: false
 		};
 		this.onImportant = this.onImportant.bind(this);
+		this.closeAndDelete = this.closeAndDelete.bind(this);
+
 		this.onLike = this.onLike.bind(this);
 		this.toggle = this.toggle.bind(this);
 
@@ -18,6 +20,13 @@ class PostListItem extends Component {
 		this.setState({
 				modal: !this.state.modal
 		});
+
+}
+closeAndDelete(){
+	this.toggle();
+	setTimeout(() => {
+		this.props.onDelete();
+		}, 500);
 }
 
 	onImportant() {
@@ -70,7 +79,7 @@ class PostListItem extends Component {
 					Вы точно хотите удалить пост?
 			</ModalBody>
 			<ModalFooter>
-					<Button color="primary" onClick={onDelete}>Да</Button>{' '}
+					<Button color="primary" onClick={this.closeAndDelete}>Да</Button>{' '}
 					<Button color="secondary" onClick={this.toggle}>Отмена</Button>
 			</ModalFooter>
 	 </Modal>

@@ -1,16 +1,25 @@
 import React, {Component} from 'react';
 import './postPistItem.css'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 class PostListItem extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
 			important: false,
-			like: false
+			like: false,
+			modal: false
 		};
 		this.onImportant = this.onImportant.bind(this);
 		this.onLike = this.onLike.bind(this);
+		this.toggle = this.toggle.bind(this);
 
 	}
+	toggle() {
+		this.setState({
+				modal: !this.state.modal
+		});
+}
+
 	onImportant() {
 		this.setState(({important}) => ({
 			important: !important
@@ -32,28 +41,41 @@ class PostListItem extends Component {
 		 classNames += ' like'
 	 }
 		return (
-  <div className={classNames}>
-			<span 
-			className="app-list-item-label"
-			onClick={this.onLike}>
-			{label}
-			</span>
-			<div className="d-flex justify-content-center align-items-center">
-				<button 
-				type="button" 
-				className="btn-star btn-sm"
-				onClick={this.onImportant}>
-					<i className="fa fa-star"></i>
-				</button>
-				<button 
+  <>
+  	<div className={classNames}>
+				<span 
+				className="app-list-item-label"
+				onClick={this.onLike}>
+				{label}
+				</span>
+				<div className="d-flex justify-content-center align-items-center">
+					<button 
 					type="button" 
-					className="btn-trash btn-sm"
-					onClick={onDelete}>
-					<i className="fa fa-trash-o"></i>
-				</button>
-				<i className="fa fa-heart"></i>
-		 </div>
-		</div>
+					className="btn-star btn-sm"
+					onClick={this.onImportant}>
+						<i className="fa fa-star"></i>
+					</button>
+					<button 
+						type="button" 
+						className="btn-trash btn-sm"
+						onClick={this.toggle}>
+						<i className="fa fa-trash-o"></i>
+					</button>
+					<i className="fa fa-heart"></i>
+			 </div>
+			</div>
+			<Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+			 <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+			 <ModalBody>
+					Вы точно хотите удалить пост?
+			</ModalBody>
+			<ModalFooter>
+					<Button color="primary" onClick={onDelete}>Да</Button>{' '}
+					<Button color="secondary" onClick={this.toggle}>Отмена</Button>
+			</ModalFooter>
+	 </Modal>
+  </>
+		
 		)
 	}
 }

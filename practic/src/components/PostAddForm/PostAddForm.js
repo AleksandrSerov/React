@@ -26,6 +26,7 @@ const PostAddForm = ({onAdd}) => {
 				 добавить
 				</button>
 		</BottomPanel>
+		
 
 	)
 }

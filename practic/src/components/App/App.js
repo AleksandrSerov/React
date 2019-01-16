@@ -5,7 +5,7 @@ import SearchPanel from '../SearchPanel';
 import PostStatusFilter from '../PostStatusFilter';
 import PostList from '../PostList';
 import PostAddForm from '../PostAddForm';
-// import nanoid from 'nanoid';
+import nanoid from 'nanoid';
 
 
 import styled from 'styled-components';
@@ -40,9 +40,7 @@ class App extends Component {
 	   ]
 		}
 	}
-	getRandomInt = (min, max) => {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
+
 	deleteItem(id){
 		this.setState(({data}) => {
 			const index = data.findIndex(elem => elem.id === id)
@@ -53,11 +51,10 @@ class App extends Component {
 		})
 		}
 	addItem(body) {
-		const randomId = Math.floor(Math.random() * (100 - 10)) + 10;
 		const newItem = {
 			label: body,
 			important: false,
-			id: randomId
+			id: nanoid(4)
 		}
 		this.setState(({data}) => {
 			const newArr = [...data, newItem];

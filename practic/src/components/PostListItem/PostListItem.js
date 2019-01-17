@@ -40,9 +40,14 @@ closeAndDelete(){
 		}))
 	}
 	render() {
-		const {label, onDelete} = this.props;
+		const {label} = this.props;
 		const {important, like} = this.state;
-		let classNames ='app-list-item d-flex justify-content-between'
+		let day = new Date().getDate();
+		let month = new Date().getMonth()+1;
+		if (day < 10) day = '0' + day;
+		if (month < 10) month = '0' + month;
+		const date = `${day}.${month}`;
+		let classNames ='app-list-item d-flex justify-content-between';
 	 if (important) {
 		 classNames += ' important'
 		}
@@ -70,6 +75,7 @@ closeAndDelete(){
 						onClick={this.toggle}>
 						<i className="fa fa-trash-o"></i>
 					</button>
+					<div className="date">{date}</div>
 					<i className="fa fa-heart"></i>
 			 </div>
 			</div>

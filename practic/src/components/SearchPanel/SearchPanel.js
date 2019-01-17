@@ -15,7 +15,7 @@ class SearchPanel extends Component{
 		this.onUpdateSearch = this.onUpdateSearch.bind(this);
 	}
 	onUpdateSearch(e) {
-		const term = e.target.value;
+		const term = e.target.value.toLowerCase();
 		this.setState({term});
 		this.props.onUpdateSearch(term);
 	}

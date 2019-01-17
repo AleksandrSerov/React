@@ -117,7 +117,8 @@ class App extends Component {
 			return items;
 		}
 		return items.filter((item) => {
-			return item.label.indexOf(term) > -1;
+			const str = item.label.toLowerCase();
+			return str.indexOf(term) > -1;
 		});
 	}
 	onUpdateSearch(term){

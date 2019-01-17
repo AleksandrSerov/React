@@ -15,10 +15,42 @@ const Header = styled.div`
 `
 
 const AppHeader = ({liked, allPosts}) => {
+ let note = 'записей'
+	switch(allPosts % 10) {
+		case 1:
+		 allPosts % 100 === 11 ? note = 'записей' : note = 'запиcь'
+			break
+			case 2:
+		 allPosts % 100 === 12 ? note = 'записей' : note = 'запиcи'
+			break
+			case 3:
+		 allPosts % 100 === 13 ? note = 'записей' : note = 'запиcи'
+			break
+			case 4:
+		 allPosts % 100 === 14 ? note = 'записей' : note = 'запиcи'
+			break
+			case 5:
+		 note = 'записей'
+			break
+			case 6:
+		 note = 'записей'
+			break
+			case 7:
+		 note = 'записей'
+			break
+			case 8:
+		 note = 'записей'
+			break
+			case 9:
+		 note = 'записей'
+			break
+  default: note = 'записей'
+    break
+}
     return (
 				<Header >
 					<h1>Александр Серов</h1>
-					<h2>{allPosts} записей, из них понравилось {liked}</h2>
+					<h2>{allPosts} {note}, из них понравилось {liked}</h2>
 				</Header>
 				);
 }

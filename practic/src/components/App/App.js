@@ -19,6 +19,8 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.deleteItem = this.deleteItem.bind(this);
+		this.editItem = this.editItem.bind(this);
+
 		this.addItem = this.addItem.bind(this);
 		this.state = {
 			data : [
@@ -63,6 +65,20 @@ class App extends Component {
 			}
 		})
 	}
+	editItem(label, id){
+		const newItem = {
+			label: label,
+			important: false,
+			id: nanoid(4)
+		}
+		this.setState(({data}) => {
+			const index = data.findIndex(elem => elem.id === id);
+			const newArr = [...data.slice(0, index), newItem,  ...data.slice(index+1)];
+			return {
+				data: newArr
+			}
+		})
+	}
     render(){
 					return (
 						<AppBlock>
@@ -73,7 +89,8 @@ class App extends Component {
 							</div>
 							<PostList 
 							posts={this.state.data}
-							onDelete={this.deleteItem} />
+							onDelete={this.deleteItem}
+							onEdit={this.editItem} />
 							<PostAddForm 
 							 onAdd = {this.addItem}/>
 	

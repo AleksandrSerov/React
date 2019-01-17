@@ -2,7 +2,7 @@ import React from 'react';
 import PostListItem from '../PostListItem';
 import { ListGroup } from 'reactstrap';
 import './postList.css'
-const PostList = ({posts, onDelete, onEdit}) => {
+const PostList = ({posts, onDelete, onEdit, onToggleImportant, onToggleLiked}) => {
 	const isObject = (value) => {
 		return value && typeof value === 'object' && value.constructor === Object;
 		}
@@ -14,7 +14,9 @@ const PostList = ({posts, onDelete, onEdit}) => {
 				<PostListItem {...itemProps}
 				id = {id}
 				onDelete={() => onDelete(id)}
-				onEdit={onEdit}/>
+				onEdit={onEdit}
+				onToggleImportant={() => onToggleImportant(id)}
+				onToggleLiked={() => onToggleLiked(id)}/>
 				</li>
 			)
 		}	

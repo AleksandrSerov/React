@@ -1,24 +1,19 @@
 import React, {Component} from 'react';
 import './postPistItem.css'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText  } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 class PostListItem extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			important: false,
-			like: false,
 			modal: false,
 			editModal: false,
 			label: this.props.label
 		};
-		this.onImportant = this.onImportant.bind(this);
 		this.closeAndDelete = this.closeAndDelete.bind(this);
 		this.closeAndEdit = this.closeAndEdit.bind(this);
 		this.editToggle = this.editToggle.bind(this);
 		this.labelChange = this.labelChange.bind(this);
-		this.onLike = this.onLike.bind(this);
 		this.toggle = this.toggle.bind(this);
-
 	}
 	toggle() {
 		this.setState({
@@ -46,20 +41,8 @@ labelChange(e) {
 	}
 	)
 }
-	onImportant() {
-		this.setState(({important}) => ({
-			important: !important
-		}))
-	}
-	onLike() {
-		this.setState(({like}) => ({
-			like: !like
-		}))
-	}
 	render() {
-		const {label} = this.props;
-		const {important, like} = this.state;
-		
+		const {label, onToggleImportant, onToggleLiked, important, like} = this.props;
 		let day = new Date().getDate();
 		let month = new Date().getMonth()+1;
 		if (day < 10) day = '0' + day;
@@ -77,7 +60,7 @@ labelChange(e) {
   	<div className={classNames}>
 				<span 
 				className="app-list-item-label"
-				onClick={this.onLike}>
+				onClick={onToggleLiked}>
 				{label}
 				</span>
 				<div className="d-flex justify-content-center align-items-center">
@@ -90,7 +73,7 @@ labelChange(e) {
 					<button 
 					type="button" 
 					className="btn-star btn-sm"
-					onClick={this.onImportant}>
+					onClick={onToggleImportant}>
 						<i className="fa fa-star"></i>
 					</button>
 					<button 

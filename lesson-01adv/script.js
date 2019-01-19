@@ -9,6 +9,7 @@ function loadImage(path) {
 		image.onload = () => resolve(image);
 		image.onerror = () => reject(path);
 	});
+	
 }
 let promises = [];
 for (let item of images) {

@@ -1,5 +1,16 @@
-import {employersNames} from './Employers'
-import {money, sponsors} from './Money'
+import Employers from './Employers'
+import Money from './Money'
+
+let employers = new Employers(['Alex', '', 'ludmila', 'Viktor', '', 'oleg', 'iNna', 'Ivan', 'Alex', 'Olga', ' Ann']);
+employers = employers.sort();
+
+const sponsors = {
+	cash: [40000, 5000, 30400, 12000],
+	eu: ['SRL', 'PLO', 'J&K'],
+	rus: ['RusAuto', 'SBO']
+};
+
+let money = new Money(sponsors, null, sponsors.cash);
 
 class MakeBusiness {
 	constructor(owner, director = 'Victor', cash, emp) {
@@ -17,5 +28,5 @@ class MakeBusiness {
 	}
 }
 
-const business = new MakeBusiness(...['Sam', null, money, employersNames]);
+const business = new MakeBusiness(...['Sam', null, money.calcCash(), employers.sort()]);
 business.showInfo();

@@ -12,19 +12,18 @@ const sponsors = {
 	rus: ['RusAuto', 'SBO']
 };
 
-let calcCash = (own = 0, ...everyCash) => {
-	[everyCash] = everyCash;
+let calcCash = (own = 0, everyCash) => {
 	let total = everyCash.reduce((total, currentValue) => total + currentValue) + own;
 	return total;
 };
 
 let money = calcCash(null, sponsors.cash);
 
-let makeBusiness = (owner, director = 'Victor', cash, emp) => {
+let makeBusiness = (owner, cash, emp, director = 'Victor') => {
 	const sumSponsors = [...sponsors.eu, ...sponsors.rus, 'unexpected sponsor'];
 	console.log(`We have a business. Owner: ${owner}, director: ${director}. Our budget: ${cash}. And our employers: ${emp}`);
 	console.log('And we have a sponsors: ');
 	console.log(...sumSponsors);
 	console.log(`Note. Be careful with ${sponsors.eu[0]}. It's a huge risk.`);
 };
-makeBusiness(...['Sam', null, money, employersNames]);
+makeBusiness(...['Sam', money, employersNames]);

@@ -17,14 +17,16 @@ const RandomCharBlock = styled.div`
 `
 
 export default class RandomChar extends Component {
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 		this.updateChar();
 	}
 	gotService = new gotService();
 	state = {
 		char: {},
-		loading: true
+		loading: true,
+		error: false,
+		show: true
 	}
 	onCharLoaded = (char) => {
 		this.setState({
@@ -40,27 +42,27 @@ export default class RandomChar extends Component {
 		})
 	}
 	updateChar() {
-		// const id = Math.floor(Math.random()*140 + 25);
-		const id = Math.floor(111111111);
-
+		const id = Math.floor(111);
 		this.gotService.getCharacter(id)
 		.then(this.onCharLoaded)
 		.catch(this.onError)
+	}	
+	render() {
+		const {char, loading, error} = this.state;		
+		const content = !(loading || error ) ? <View char={char}/> : null;
+		const errorMessage = error ? <ErrorMessage/> : null;
+		const spinner = loading ? <Spinner/> : null;
+					return (
+						<>
+							<RandomCharBlock className="rounded">
+							{errorMessage}
+							{spinner}
+							{content}
+							
+							</RandomCharBlock>
+						</>
+					);
 	}
-    render() {
-					const {char, loading, error} = this.state;
-					const content = !(loading || error) ? <View char={char}/> : null;
-					const errorMessage = error ? <ErrorMessage/> : null;
-					const spinner = loading ? <Spinner/> : null;
-        return (
-            <RandomCharBlock className="rounded">
-												{errorMessage}
-												{spinner}
-												{content}
-												
-            </RandomCharBlock>
-        );
-    }
 }
 
 const View = ({char}) => {

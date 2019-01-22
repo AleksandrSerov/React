@@ -2,22 +2,19 @@ import React, {Component} from 'react';
 import {Col, Row, Container} from 'reactstrap';
 import Header from '../header';
 import RandomChar from '../randomChar';
-import ItemList from '../itemList';
-import CharDetails from '../charDetails'
-
+import CharacterPage from '../characterPage';
 class App extends Component {
-	constructor(){
-		super();
-	}
 	state = {
 		showRandomChar: true
 	}
+
 	toggleBlock = () => {
 		this.setState({
 			showRandomChar: !this.state.showRandomChar
 		})
 	}
 	render() {
+		
 		const randomChar = this.state.showRandomChar ? <RandomChar show = {this.toggleBlock}/> : null;
 		return(
 			<>
@@ -31,14 +28,7 @@ class App extends Component {
 					{randomChar}
 					</Col>
 				</Row>
-				<Row>
-					<Col md='6'>
-						<ItemList />
-					</Col>
-					<Col md='6'>
-						<CharDetails />
-					</Col>
-				</Row>
+				<CharacterPage/>
 			</Container>
 			</>
 	 )

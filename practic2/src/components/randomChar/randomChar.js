@@ -17,9 +17,13 @@ const RandomCharBlock = styled.div`
 `
 
 export default class RandomChar extends Component {
-	constructor(props){
-		super(props);
+	componentDidMount() {
 		this.updateChar();
+		this.timerId = setInterval(this.updateChar, 1500);		
+	}
+	componentWillUnmount(){
+		clearInterval(this.timerId);
+
 	}
 	gotService = new gotService();
 	state = {
@@ -41,8 +45,8 @@ export default class RandomChar extends Component {
 		 loading: false
 		})
 	}
-	updateChar() {
-		const id = Math.floor(111);
+	updateChar = () => {
+		const id = Math.floor(Math.random()*140 + 25);
 		this.gotService.getCharacter(id)
 		.then(this.onCharLoaded)
 		.catch(this.onError)

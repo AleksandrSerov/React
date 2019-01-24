@@ -2,7 +2,8 @@ class GotService {
 	constructor() {
 		this._apiBase = 'https://www.anapioficeandfire.com/api'
 	}
-	async getResource(url) {
+	
+	 getResource = async (url) => {
 		const res = await fetch(`${this._apiBase}${url}`);
 		if (!res.ok) {
 			throw new Error(`Could not fetch ${url}` + 
@@ -10,55 +11,58 @@ class GotService {
 		}
 		return await res.json();
 	}
-	async getAllCharacters() {
+	 getAllCharacters = async () => {
 		const res = await this.getResource(`/characters?page=5&pageSize=10`);
 		return res.map(this._transformCharacter) 
 	}
-	async getCharacter(id) {
+	 getCharacter = async (id) => {
 		const res = await this.getResource(`/characters/${id}`);
 		return this._transformCharacter(res);
 	}
-	async getAllBooks() {
+	 getAllBooks = async () => {
 		const res = await this.getResource(`/books?page=1&pageSize=100`);
-		return res.map(this._transformBook());
+		return res.map(this._transformBook);
 	}
-	async getBook(id) {
+	 getBook = async (id) => {
 		const res = await this.getResource(`/books/${id}`);
 		return this._transformBook(res)
 	}
-	async getAllHouses() {
-		const res = this.getResource(`/houses?page=1&pageSize=100`);
-		return res.map(this._transformHouse(res));
+	 getAllHouses = async () => {
+		const res = await this.getResource(`/houses?page=1&pageSize=100`);
+		return res.map(this._transformHouse);
 	}
-	async getHouse(id) {
-		const res = this.getResource(`/houses/${id}`);
+	 getHouse = async (id) => {
+		const res = await this.getResource(`/houses/${id}`);
 		return this._transformHouse(res)
 	}
-	_transformCharacter(char) {
+	_transformCharacter = (char) => {
 		return {
-			name: char.name,
-			gender: char.gender,
-			born: char.born,
-			died: char.died,
-			culture: char.culture
+			name: char.name || 'no information',
+			gender: char.gender || 'no information',
+			born: char.born || 'no information',
+			died: char.died || 'no information',
+			culture: char.culture || 'no information',
+			id: char.url.replace(/https:\/\/www.anapioficeandfire.com\/api\/characters\//, "" )
 		}
 	}
-	_transformHouse(house) {
+	_transformHouse = (house) => {
 		return {
-			name: house.name,
-			region: house.region,
-			words: house.words,
-			titles: house.titles,
-			overlord: house.overlord,
-			ancestralWeapons: house.ancestralWeapons
+			name: house.name || 'no information',
+			region: house.region || 'no information',
+			words: house.words || 'no information',
+			titles: house.titles || 'no information',
+			overlord: house.overlord || 'no information',
+			ancestralWeapons: house.ancestralWeapons || 'no information',
+			id: house.url.replace(/https:\/\/www.anapioficeandfire.com\/api\/houses\//, "" )
 		}
 	}
-	_transformBook(book) {
+	_transformBook = (book) => {
 		return {
-			name: book.name,
-			numberofPages: book.numberOfPages,
-			publiser: book.publiser,
-			released: book.realised
+			name: book.name || 'no information',
+			numberofPages: book.numberOfPages || 'no information',
+			publiser: book.publiser || 'no information',
+			released: book.realised || 'no information',
+			id: book.url.replace(/https:\/\/www.anapioficeandfire.com\/api\/books\//, "" )
 		}
 	}
 }

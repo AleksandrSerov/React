@@ -1,3 +1,3 @@
-import HousesPage from './housePage';
+import HousePage from './housePage';
 
-export default HousesPage;
+export default HousePage;

@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import ItemList from '../../itemList';
-import ItemDetails, {Field} from '../../itemDetails'
 import GotService from '../../../services/gotService';
-import RowBlock from '../../rowBlock'
 import {withRouter} from 'react-router-dom';
 
 class HousePage extends Component {

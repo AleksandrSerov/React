@@ -91,7 +91,6 @@ export default class ItemDetails extends Component {
 		const {loading} = this.state;
 		const spinner = loading ? <Spinner/> : null;
 		const content = !loading ? <Content item = {this.state.item} childrens = {this.props.children}/> : null;
-		console.log(this.props.children)
 		return (
 			<ItemDetailsBox className="rounded">
 				{spinner}
